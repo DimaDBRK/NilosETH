@@ -41,7 +41,28 @@ The <a href="/backend/ormconfig.json" target="_blank">ormconfig.json</a> file in
 
 Installation: If you don't have SQLite installed on your system, you'll need to install it. Often just need the SQLite library which is usually included in most operating systems by default.
 
+Database Tool: For a more visual approach, you might want to use a database tool that supports SQLite, like DB Browser for SQLite, to view and interact your database directly.
+
 There are Tables:
+
+User 
+* id: number - @PrimaryColumn
+* username: string
+* password: string
+* accounts: Account[] - @OneToMany => Account
+
+Account
+* id: number - @PrimaryColumn !!! Added auto ID
+* publicKey: string
+* privateKey: string
+* user: User - @ManyToOne => User
+
+Payment
+* id: number - @PrimaryColumn
+* from: Account - @ManyToOne(() => Account) - @JoinColumn({ name: 'from' })
+* to: Account - @ManyToOne(() => Account) - @JoinColumn({ name: 'to' })
+* amount: number - ('bigint')
+
 
 ## Backend and API
 
@@ -51,10 +72,14 @@ It  easily integrate with other libraries like TypeORM for database interactions
 List of API’s:
 
 User
-* POST /api/users/login
-* POST /api/users/register
-* GET /api/users/all
-* GET /api/users/logout
+* GET  /user - list of all users
+* GET /user/:id - single user info by ID
+* POST /user - Creates a new user, payload (body) containing the user's data => User entity
+Added endpoints for UI demo:
+* POST /user/login - basic approach username and password check
+* DELETE /user/:id - 
+
+
 
 Item
 * GET /api/menu/items/all
