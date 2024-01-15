@@ -24,6 +24,7 @@ ganache.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
 });
 
+// Error
 ganache.stderr.on('data', (data) => {
     console.error(`stderr: ${data}`);
 });
