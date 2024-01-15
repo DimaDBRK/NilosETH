@@ -1,5 +1,6 @@
+# Nilos.IO
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  ![Logo](/docs/images/niloslogo.png)
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -10,7 +11,29 @@
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 
 </p>
-  
+
+# Task Description: 
+
+## Web Service Overview
+
+The application allows viewing and editing the restaurant menu through a web interface.
+
+- Frontend: React + Axios
+- Backend: Node.js + PostgreSQL + Prisma
+- Authentication System: JWT-based
+
+Demo video: TBC
+
+## Table of Contents
+- [Nilos.IO](#nilosio)
+- [Task Description:](#task-description)
+  - [Web Service Overview](#web-service-overview)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Running the app](#running-the-app)
+  - [Test](#test)
+
+
 
 ## Installation
 
