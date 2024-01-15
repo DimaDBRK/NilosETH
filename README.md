@@ -10,9 +10,12 @@
 
 The application allows viewing and editing the restaurant menu through a web interface.
 
+
+- Backend: Nest.js + SQLite + ethers.js
+- Blockchain: Ganache - personal Ethereum blockchain
+- Tests: e2e
 - Frontend: React + Axios
-- Backend: Node.js + PostgreSQL + Prisma
-- Authentication System: JWT-based
+- Authentication System: (mock) for demo only
 
 Demo video: TBC
 
@@ -24,13 +27,20 @@ Demo video: TBC
   - [Database](#database)
   - [Backend and API](#backend-and-api)
   - [Ganache](#ganache)
+  - [Tests](#tests)
   - [Installation](#installation)
   - [Running the app](#running-the-app)
   - [Test](#test)
 
 ## Database
-Prisma automates every part of setup and running of PostgreSQL clusters.
-For details check backend - prisma - schema.prisma
+
+Database type is SQLite.
+It is serverless database engine.
+The <a href="/backend/ormconfig.json" target="_blank">ormconfig.json</a> file indicates that your NestJS application is configured to use a SQLite database.
+"db" - the name of the SQLite database file. This file will be located in the root of project directory.
+
+Installation: If you don't have SQLite installed on your system, you'll need to install it. Often just need the SQLite library which is usually included in most operating systems by default.
+
 There are Tables:
 
 ## Backend and API
@@ -88,6 +98,8 @@ Ganache CLI provides an option to save the state of test blockchain into a works
 --db option to the Ganache CLI command added to specify the directory where the workspace data will be saved
 
 Pay attention, Ganache is a development tool, and the accounts and their balances are not real but are simulated for testing purposes.
+
+## Tests
 
 ## Installation
 
