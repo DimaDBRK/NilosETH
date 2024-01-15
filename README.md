@@ -1,6 +1,7 @@
 # Nilos.IO
- ![Logo](/docs/images/niloslogo.png)
+ <!-- ![Logo](/docs/images/niloslogo.png) -->
 
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="/docs/images/niloslogo.png" alt="NPM Version" /></a>
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
