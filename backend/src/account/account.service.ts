@@ -27,7 +27,7 @@ export class AccountService {
     // Connect to Ganache 
     // If no %%url%% is provided, it connects to the default
     // http://localhost:8545, which most nodes use.
-    this.provider = new ethers.JsonRpcProvider('http://localhost:8545');
+    this.provider = new ethers.JsonRpcProvider();
   }
 
   async createAccount(createAccountDto: CreateAccountDto): Promise<Account> {
@@ -42,7 +42,7 @@ export class AccountService {
     
     // TODO: Create a new account using ethers module
     // Create a new wallet (STATIC METHODS, no new keyword)
-    const wallet = ethers.Wallet.createRandom();
+    const wallet = ethers.Wallet.createRandom(this.provider);
 
      // wallet details to the account entity. 
      // Storing private keys in DB- check secure ???

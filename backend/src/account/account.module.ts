@@ -10,6 +10,6 @@ import { UserModule } from '../user/user.module'; // Import UserModule
   imports: [TypeOrmModule.forFeature([Account]),  UserModule], // add User module import
   providers: [AccountService],
   controllers: [AccountController],
-  exports: [AccountService]
+  exports: [TypeOrmModule, AccountService] // added TypeOrmModule for export to payment 
 })
 export class AccountModule {}

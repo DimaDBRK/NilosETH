@@ -81,7 +81,7 @@ Added endpoints for UI demo:
 
 
 
-Item
+Account
 * GET /api/menu/items/all
 * POST /api/menu/items/create
 * PUT /api/menu/items/update/{ID}
@@ -89,22 +89,39 @@ Item
 * POST /api/menu/items/update_picture/{ID}
 * DELETE /api/menu/items/delete_picture/{ID}
 
-Category
-* GET /api/menu/categories/all
-* POST api/menu/categories/create
-* PUT /api/menu/categories/update/{ID}
-* DELETE /api/menu/categories/delete/{ID}
+Payment
+* GET /payment - list of all payment records
+* GET /payment/:id - single payment record by ID.
+* POST /payment - Creates a new payment record. The request body structure defined in CreatePaymentDto. 
+  Additionally - Implement logging for errors.
+Added endpoints for test & demo:
+* POST /payment/funding - fund app account (by ID) from test  (Ganache) account by Privatekey
+* POST /payment/balance - check balance of accounts (arr od ID's)
   
-Blockchain interacting
+Blockchain interacting:
 <a href="https://docs.ethers.org/v6/" target="_blank">ethers</a> link.
 The ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.
 
+New Account creation:
+The ethers library, when used with Wallet.createRandom(), generates a new Ethereum wallet (which includes a public-private key pair) independently of the Ethereum network or any node you are connected to (Ganache in this app).
+
+There will not be new account in Ganache API request - get all accounts.
+
+It's creating an Ethereum wallet with a new public-private key pair, but this wallet is not being "registered" or "created" on the Ganache blockchain. Instead, it exists as a standalone entity. In Ethereum, wallets don't need to be registered with the network; their existence is implicit. When a wallet interacts with the blockchain (like sending a transaction), that's when it becomes part of the blockchain's state.
+
+Funding Accounts: 
+For the sending account to have sufficient Ether, you  need to use one of the pre-funded accounts provided by Ganache (for test - created 10 accounts with 1000 ETH).
 
 ## Ganache
 Quickly fire up a personal Ethereum blockchain which used to run tests, execute commands, and inspect state while controlling how the chain operates.
 <a href="https://trufflesuite.com/ganache/" target="_blank">Documentation</a> link.
-Setting up a separate Ganache instance and interfacing with it programmatically test server.
 Installation:
+Option 1. GUI
+Download SW and install.
+API requests also supported.
+
+Option 2. Setting up a separate Ganache instance and interfacing with it programmatically on test server.
+There are limitations in this case. Additional settings needed.
 installed globally
 ```bash
 npm install -g ganache-cli
