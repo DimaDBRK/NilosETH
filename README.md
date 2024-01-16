@@ -5,7 +5,23 @@
 </p>
   
 # Task Description: 
+Nilos create the future of Web 3 banking today! 
+NestJS app containing three modules: 
+* User 
+* Account
+* Payment. 
 
+Via the API that is exposed with NestJS our users beyond other things can:
+* create the record of themselves in the database;
+* create multiple Ethereum accounts; 
+* and make payments between accounts.
+
+TODO: 
+* Implement Ethereum account creation in account.service.ts
+* Implement payment creation in payment.service.ts
+* Define and implement reasonable test cases for account service in account.service.spec.ts
+* Define and implement reasonable test cases for payment service in payment.service.spec.ts
+* 
 ## Web Service Overview
 
 The application allows viewing and editing the restaurant menu through a web interface.
@@ -31,7 +47,6 @@ Demo video: TBC
   - [.ENV](#env)
   - [Installation](#installation)
   - [Running the app](#running-the-app)
-  - [Test](#test)
 
 ## Database
 
@@ -144,6 +159,20 @@ Pay attention, Ganache is a development tool, and the accounts and their balance
 
 ## Tests
 
+Standard Nest.JS test commands:
+
+```bash
+# unit tests
+$ yarn run test
+
+# e2e tests
+$ yarn run test:e2e
+
+# test coverage
+$ yarn run test:cov
+```
+
+
 ## .ENV
 dotenv package used
 .env file include environment variables:
@@ -154,6 +183,7 @@ GANACHE_URL=http://localhost:7545
 ```bash
 $ yarn install
 ```
+Create .env file
 
 ## Running the app
 
@@ -168,15 +198,3 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
