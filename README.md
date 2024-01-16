@@ -3,29 +3,21 @@
 <p align="center">
   <a href="https://www.nilos.io/" target="_blank"><img src="/docs/images/niloslogo.png" alt="Nilos IO" /></a>
 </p>
-  
-# Task Description: 
 Nilos create the future of Web 3 banking today! 
-NestJS app containing three modules: 
-* User 
-* Account
-* Payment. 
 
-Via the API that is exposed with NestJS our users beyond other things can:
-* create the record of themselves in the database;
-* create multiple Ethereum accounts; 
-* and make payments between accounts.
+# Task Description: 
 
 TODO: 
 * Implement Ethereum account creation in account.service.ts
 * Implement payment creation in payment.service.ts
 * Define and implement reasonable test cases for account service in account.service.spec.ts
 * Define and implement reasonable test cases for payment service in payment.service.spec.ts
-* 
+
+<p align="center">
+  <a href="https://ethereum.org/" target="_blank"><img src="/docs/images/ethlogo.png" alt="ethereum" /></a>
+</p>
+
 ## Web Service Overview
-
-The application allows viewing and editing the restaurant menu through a web interface.
-
 
 - Backend: Nest.js + SQLite + ethers.js
 - Blockchain: Ganache - personal Ethereum blockchain
@@ -33,6 +25,16 @@ The application allows viewing and editing the restaurant menu through a web int
 - Frontend: React + Axios
 - Authentication System: (mock) for demo only
 
+NestJS app containing three modules: 
+* User 
+* Account
+* Payment. 
+
+Via the API that is exposed with NestJS users can:
+* create the record of themselves in the database;
+* create multiple Ethereum accounts; 
+* and make payments between accounts.
+  
 Demo video: TBC
 
 ## Table of Contents
