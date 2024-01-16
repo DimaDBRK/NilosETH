@@ -27,7 +27,9 @@ export class AccountService {
     // Connect to Ganache 
     // If no %%url%% is provided, it connects to the default
     // http://localhost:8545, which most nodes use.
-    this.provider = new ethers.JsonRpcProvider();
+    // Use the environment variable for the provider URL
+    const ganacheUrl = process.env.GANACHE_URL || 'http://localhost:7545';
+    this.provider = new ethers.JsonRpcProvider(ganacheUrl);
   }
 
   async createAccount(createAccountDto: CreateAccountDto): Promise<Account> {
@@ -53,12 +55,13 @@ export class AccountService {
     return this.accountRepository.save(account);
   }
 
+  // modification from user to account
   async findOne(id: number) {
-    const user = await this.accountRepository.findOne({where: {id}});
-    if (!user) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+    const account = await this.accountRepository.findOne({where: {id}});
+    if (!account) {
+      throw new NotFoundException(`Account with ID ${id} not found`);
     }
-    return user;
+    return account;
   }
 
   async findAll() {

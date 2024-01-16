@@ -28,6 +28,7 @@ Demo video: TBC
   - [Backend and API](#backend-and-api)
   - [Ganache](#ganache)
   - [Tests](#tests)
+  - [.ENV](#env)
   - [Installation](#installation)
   - [Running the app](#running-the-app)
   - [Test](#test)
@@ -80,18 +81,15 @@ Added endpoints for UI demo:
 * DELETE /user/:id - 
 
 
-
 Account
-* GET /api/menu/items/all
-* POST /api/menu/items/create
-* PUT /api/menu/items/update/{ID}
-* DELETE /api/menu/items/delete/{ID}
-* POST /api/menu/items/update_picture/{ID}
-* DELETE /api/menu/items/delete_picture/{ID}
+* GET /account - list of all accounts.
+* GET /account/:id - account  info by its ID.
+* POST /account - creates a new account. The request JSON body containing the necessary user data - ID.
+
 
 Payment
-* GET /payment - list of all payment records
-* GET /payment/:id - single payment record by ID.
+* GET /payment - list of all payment records. Added from and to (id + public account) in result.
+* GET /payment/:id - single payment record by ID. Added from and to (id + public account) in result.
 * POST /payment - Creates a new payment record. The request body structure defined in CreatePaymentDto. 
   Additionally - Implement logging for errors.
 Added endpoints for test & demo:
@@ -115,10 +113,12 @@ For the sending account to have sufficient Ether, you  need to use one of the pr
 ## Ganache
 Quickly fire up a personal Ethereum blockchain which used to run tests, execute commands, and inspect state while controlling how the chain operates.
 <a href="https://trufflesuite.com/ganache/" target="_blank">Documentation</a> link.
+
 Installation:
+
 Option 1. GUI
 Download SW and install.
-API requests also supported.
+API requests also supported It will start on: http://localhost:7545 or http://127.0.0.1:7545
 
 Option 2. Setting up a separate Ganache instance and interfacing with it programmatically on test server.
 There are limitations in this case. Additional settings needed.
@@ -138,10 +138,16 @@ It will start on: http://localhost:8545 or http://127.0.0.1:8545
 Saving the Ganache workspace used -  to preserve the state of your blockchain environment across different sessions. 
 Ganache CLI provides an option to save the state of test blockchain into a workspace.
 --db option to the Ganache CLI command added to specify the directory where the workspace data will be saved
+But there is limitation:  It should preserve information like transactions, block numbers, and contract states. However, it's crucial to understand that this may not include the preservation of dynamically created accounts (those created after Ganache has started) across restarts. Accounts created through JSON-RPC API calls (e.g., personal_newAccount) during a session are typically not persisted across restarts of the Ganache instance, even with the --db option. If you create new accounts during a session and need these accounts available in subsequent sessions, you would typically need to script their recreation upon restart.
 
 Pay attention, Ganache is a development tool, and the accounts and their balances are not real but are simulated for testing purposes.
 
 ## Tests
+
+## .ENV
+dotenv package used
+.env file include environment variables:
+GANACHE_URL=http://localhost:7545
 
 ## Installation
 

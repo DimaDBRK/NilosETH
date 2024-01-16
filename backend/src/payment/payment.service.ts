@@ -32,7 +32,9 @@ export class PaymentService {
     // Connect to Ganache 
     // If no %%url%% is provided, it connects to the default
     // http://localhost:8545 for PU and http://localhost:7545 for GUI, which most nodes use.
-    this.provider = new ethers.JsonRpcProvider('http://localhost:7545');
+    // Use the environment variable for the provider URL
+    const ganacheUrl = process.env.GANACHE_URL || 'http://localhost:7545'; 
+    this.provider = new ethers.JsonRpcProvider(ganacheUrl);
   }
 
   async create(createPaymentDto: CreatePaymentDto): Promise<Payment> {
@@ -94,7 +96,22 @@ export class PaymentService {
 
   // modification - changed user to payment
   async findOne(id: number) {
-    const payment = await this.paymentsRepository.findOne({where: {id}});
+    const payment = await this.paymentsRepository.findOne({
+      where: {id},
+      relations: ['from', 'to'], // added relations to be loaded
+      select: {
+        from: {
+            id: true,
+            publicKey: true
+            // privateKey is not included
+        },
+        to: {
+            id: true,
+            publicKey: true
+            // privateKey is not included
+        }
+      }
+    });
     if (!payment) {
       throw new NotFoundException(`Payment with ID ${id} not found`);
     }
@@ -102,7 +119,21 @@ export class PaymentService {
   }
 
   async findAll() {
-    return this.paymentsRepository.find();
+    return this.paymentsRepository.find({
+      relations: ['from', 'to'], // added relations to be loaded
+      select: {
+        from: {
+            id: true,
+            publicKey: true
+            // privateKey is not included
+        },
+        to: {
+            id: true,
+            publicKey: true
+            // privateKey is not included
+        }
+      }
+    });
   }
 
   // function that funds an account using a specific Ganache account
