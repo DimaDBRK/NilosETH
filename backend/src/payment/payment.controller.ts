@@ -6,23 +6,25 @@ import { Payment } from './payment.entity';
 import { CreateFundingDto } from './dto/create-funding-private-key.dto';
 // import dto for balance check
 import { CheckBalancesDto } from './dto/check-balance.dto';
+// DTO to exclude private key from payment info
+import { PaymentDto } from './dto/payment.dto';
 
 @Controller('payment')
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
   
   @Get()
-  getPayments(): Promise<Payment[]> {
+  getPayments(): Promise<PaymentDto[]> {
     return this.paymentService.findAll();
   }
   
   @Get(':id')
-  getPaymentById(@Param('id') id: number): Promise<Payment> {
+  getPaymentById(@Param('id') id: number): Promise<PaymentDto> {
     return this.paymentService.findOne(id);
   }
 
   @Post()
-  async create(@Body() createPaymentDto: CreatePaymentDto) {
+  async create(@Body() createPaymentDto: CreatePaymentDto): Promise<PaymentDto> {
     return await this.paymentService.create(createPaymentDto);
   }
 

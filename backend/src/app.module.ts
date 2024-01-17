@@ -5,6 +5,9 @@ import { AccountModule } from './account/account.module';
 import { PaymentModule } from './payment/payment.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+// for login
+import { AuthModule } from './auth/auth.module';
+
 
 @Module({
   imports: [
@@ -17,6 +20,7 @@ import { AppService } from './app.service';
     UserModule,
     AccountModule,
     PaymentModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService]

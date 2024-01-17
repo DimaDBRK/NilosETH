@@ -1,9 +1,9 @@
 # Nilos 
  <!-- ![Logo](/docs/images/niloslogo.png) -->
+ Nilos create the future of Web 3 banking today! 
 <p align="center">
   <a href="https://www.nilos.io/" target="_blank"><img src="/docs/images/niloslogo.png" alt="Nilos IO" /></a>
 </p>
-Nilos create the future of Web 3 banking today! 
 
 # Task Description: 
 
@@ -23,7 +23,7 @@ TODO:
 - Blockchain: Ganache - personal Ethereum blockchain
 - Tests: e2e
 - Frontend: React + Axios
-- Authentication System: (mock) for demo only
+- Authentication System: for demo on modules - passport-local, @nestjs/passport, @nestjs/jwt, passport-jwt
 
 NestJS app containing three modules: 
 * User 
@@ -44,6 +44,7 @@ Demo video: TBC
   - [Table of Contents](#table-of-contents)
   - [Database](#database)
   - [Backend and API](#backend-and-api)
+  - [Blockchain interacting:](#blockchain-interacting)
   - [Ganache](#ganache)
   - [Tests](#tests)
   - [.ENV](#env)
@@ -54,23 +55,23 @@ Demo video: TBC
 
 Database type is SQLite.
 It is serverless database engine.
-The <a href="/backend/ormconfig.json" target="_blank">ormconfig.json</a> file indicates that your NestJS application is configured to use a SQLite database.
-"db" - the name of the SQLite database file. This file will be located in the root of project directory.
+The <a href="/backend/ormconfig.json" target="_blank">ormconfig.json</a> file indicates that  NestJS application is configured to use a SQLite database.
+"db" - the name of the SQLite database file. This file is located in the root of project directory.
 
 Installation: If you don't have SQLite installed on your system, you'll need to install it. Often just need the SQLite library which is usually included in most operating systems by default.
 
-Database Tool: For a more visual approach, you might want to use a database tool that supports SQLite, like DB Browser for SQLite, to view and interact your database directly.
+Database Tool: For a more visual approach, you might want to use a database tool that supports SQLite, like DB Browser for SQLite, to view and interact database directly.
 
 There are Tables:
 
 User 
-* id: number - @PrimaryColumn
+* id: number - @PrimaryColumn => Added @PrimaryGeneratedColumn()
 * username: string
 * password: string
 * accounts: Account[] - @OneToMany => Account
 
 Account
-* id: number - @PrimaryColumn !!! Added auto ID
+* id: number - @PrimaryColumn => Added @PrimaryGeneratedColumn()
 * publicKey: string
 * privateKey: string
 * user: User - @ManyToOne => User
@@ -90,12 +91,13 @@ It  easily integrate with other libraries like TypeORM for database interactions
 List of API’s:
 
 User
-* GET  /user - list of all users
-* GET /user/:id - single user info by ID
-* POST /user - Creates a new user, payload (body) containing the user's data => User entity
+* GET  /user - list of all users => Added DTO
+* GET /user/:id - single user info by ID => Added DTO
+* POST /user - Creates a new user, payload (body) containing the user's data => added DTO to return ID & username
+
 Added endpoints for UI demo:
-* POST /user/login - basic approach username and password check
-* DELETE /user/:id - 
+* POST /auth/login - standard username and password check
+* DELETE /user/:id - Remove the Relationship in Account table and delete user row
 
 
 Account
@@ -107,19 +109,23 @@ Account
 Payment
 * GET /payment - list of all payment records. Added from and to (id + public account) in result.
 * GET /payment/:id - single payment record by ID. Added from and to (id + public account) in result.
-* POST /payment - Creates a new payment record. The request body structure defined in CreatePaymentDto. 
+* POST /payment - Creates a new payment record. The request body structure defined in CreatePaymentDto. Added Payment Dto (excluded PrivateKey) from and to (id + public account) in result.
   Additionally - Implement logging for errors.
 Added endpoints for test & demo:
 * POST /payment/funding - fund app account (by ID) from test  (Ganache) account by Privatekey
 * POST /payment/balance - check balance of accounts (arr od ID's)
 
 Swagger (OpenAPI specification):
+
 NestJS SwaggerModule automatically reflects all endpoints.
 While the application is running, open your browser and navigate to http://localhost:3000/api
 To generate and download a Swagger JSON file, navigate to http://localhost:3000/api-json
+
 <a href="https://docs.nestjs.com/openapi/introduction" target="_blank">Documentation</a> link.
 
-Blockchain interacting:
+
+## Blockchain interacting:
+
 <a href="https://docs.ethers.org/v6/" target="_blank">ethers</a> link.
 The ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.
 
@@ -185,6 +191,8 @@ $ yarn run test:cov
 dotenv package used
 .env file include environment variables:
 GANACHE_URL=http://localhost:7545
+JWT_SECRET=AddYourSecretHere
+JWT_EXPIRES_IN=600s
 
 ## Installation
 

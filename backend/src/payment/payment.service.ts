@@ -13,6 +13,8 @@ import { Logger } from '@nestjs/common';
 // import dto for balance check
 import { CheckBalancesDto } from './dto/check-balance.dto';
 import { BadRequestException } from '@nestjs/common';
+// DTO to exclude private key from payment info
+import { PaymentDto } from './dto/payment.dto';
 
 @Injectable()
 export class PaymentService {
@@ -37,7 +39,7 @@ export class PaymentService {
     this.provider = new ethers.JsonRpcProvider(ganacheUrl);
   }
 
-  async create(createPaymentDto: CreatePaymentDto): Promise<Payment> {
+  async create(createPaymentDto: CreatePaymentDto): Promise<PaymentDto> {
     try {
       const payment = new Payment();
         
@@ -86,7 +88,20 @@ export class PaymentService {
       payment.to = toAccount;
       payment.amount = createPaymentDto.amount;
 
-      return await this.paymentsRepository.save(payment);
+      const savedPayment = await this.paymentsRepository.save(payment);
+      // Return PaymentDto without privateKey
+      return {
+        id: savedPayment.id,
+        from: {
+          id: savedPayment.from.id,
+          publicKey: savedPayment.from.publicKey,
+        },
+        to: {
+          id: savedPayment.to.id,
+          publicKey: savedPayment.to.publicKey,
+        },
+        amount: savedPayment.amount,
+      };
         
     } catch (error) {
       this.logger.error(`Error creating payment: ${error.message}`, error.stack);
@@ -95,45 +110,46 @@ export class PaymentService {
   }
 
   // modification - changed user to payment
-  async findOne(id: number) {
+  async findOne(id: number): Promise<PaymentDto> {
     const payment = await this.paymentsRepository.findOne({
       where: {id},
       relations: ['from', 'to'], // added relations to be loaded
-      select: {
-        from: {
-            id: true,
-            publicKey: true
-            // privateKey is not included
-        },
-        to: {
-            id: true,
-            publicKey: true
-            // privateKey is not included
-        }
-      }
     });
     if (!payment) {
       throw new NotFoundException(`Payment with ID ${id} not found`);
     }
-    return payment;
+    return {
+      id: payment.id,
+      from: {
+        id: payment.from.id,
+        publicKey: payment.from.publicKey,
+      },
+      to: {
+        id: payment.to.id,
+        publicKey: payment.to.publicKey,
+      },
+      amount: payment.amount,
+    };
+    
   }
 
-  async findAll() {
-    return this.paymentsRepository.find({
-      relations: ['from', 'to'], // added relations to be loaded
-      select: {
-        from: {
-            id: true,
-            publicKey: true
-            // privateKey is not included
-        },
-        to: {
-            id: true,
-            publicKey: true
-            // privateKey is not included
-        }
-      }
+  async findAll(): Promise<PaymentDto[]> {
+    const payments = await this.paymentsRepository.find({
+      relations: ['from', 'to'],
     });
+
+    return payments.map(payment => ({
+      id: payment.id,
+      from: {
+        id: payment.from.id,
+        publicKey: payment.from.publicKey,
+      },
+      to: {
+        id: payment.to.id,
+        publicKey: payment.to.publicKey,
+      },
+      amount: payment.amount,
+    }));
   }
 
   // function that funds an account using a specific Ganache account

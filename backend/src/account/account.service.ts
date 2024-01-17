@@ -10,6 +10,7 @@ import { CreateAccountDto } from './dto/create-account.dto';
 // and then use it to create an account
 // Import the User entity
 import { User } from '../user/user.entity'; 
+import { AccountResponseDto } from './dto/response-account.dto';
 
 @Injectable()
 export class AccountService {
@@ -32,7 +33,7 @@ export class AccountService {
     this.provider = new ethers.JsonRpcProvider(ganacheUrl);
   }
 
-  async createAccount(createAccountDto: CreateAccountDto): Promise<Account> {
+  async createAccount(createAccountDto: CreateAccountDto): Promise<AccountResponseDto> {
     // get User by "user" ID
     const user = await this.userRepository.findOne({ where: { id: createAccountDto.user } });
     if (!user) {
@@ -52,7 +53,14 @@ export class AccountService {
      account.privateKey = wallet.privateKey; 
      account.user = user; // modify from user to createAccountDto.user;
 
-    return this.accountRepository.save(account);
+    const savedAccount = await this.accountRepository.save(account);
+
+     // Return AccountResponseDto
+    return {
+      id: savedAccount.id,
+      publicKey: savedAccount.publicKey,
+      user: { id: savedAccount.user.id } // Include only the user ID
+    };
   }
 
   // modification from user to account
