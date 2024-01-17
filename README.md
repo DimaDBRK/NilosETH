@@ -112,7 +112,13 @@ Payment
 Added endpoints for test & demo:
 * POST /payment/funding - fund app account (by ID) from test  (Ganache) account by Privatekey
 * POST /payment/balance - check balance of accounts (arr od ID's)
-  
+
+Swagger (OpenAPI specification):
+NestJS SwaggerModule automatically reflects all endpoints.
+While the application is running, open your browser and navigate to http://localhost:3000/api
+To generate and download a Swagger JSON file, navigate to http://localhost:3000/api-json
+<a href="https://docs.nestjs.com/openapi/introduction" target="_blank">Documentation</a> link.
+
 Blockchain interacting:
 <a href="https://docs.ethers.org/v6/" target="_blank">ethers</a> link.
 The ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.
