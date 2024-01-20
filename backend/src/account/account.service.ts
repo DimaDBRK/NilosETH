@@ -14,8 +14,8 @@ import { AccountResponseDto } from './dto/response-account.dto';
 
 @Injectable()
 export class AccountService {
-  // provider added
-  private provider: ethers.JsonRpcProvider;
+  // make public to use in test
+  public  provider: ethers.JsonRpcProvider;
   
   constructor(
    

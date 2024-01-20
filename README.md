@@ -21,7 +21,7 @@ TODO:
 
 - Backend: Nest.js + SQLite + ethers.js
 - Blockchain: Ganache - personal Ethereum blockchain
-- Tests: e2e
+- Tests: account.service and payment.service
 - Frontend: React + Axios + MUI
 - Authentication System: for demo on modules - passport-local, @nestjs/passport, @nestjs/jwt, passport-jwt
 
@@ -46,10 +46,10 @@ Demo video: <a href="https://www.youtube.com/" target="_blank">Youtube link</a>.
   - [Backend and API](#backend-and-api)
   - [Blockchain interacting:](#blockchain-interacting)
   - [Ganache](#ganache)
-  - [Tests](#tests)
   - [.ENV](#env)
   - [Frontend](#frontend)
   - [Authentication](#authentication)
+  - [Tests](#tests)
   - [Installation](#installation)
   - [Running the app](#running-the-app)
 
@@ -173,21 +173,6 @@ But there is limitation:  It should preserve information like transactions, bloc
 
 Pay attention, Ganache is a development tool, and the accounts and their balances are not real but are simulated for testing purposes.
 
-## Tests
-
-Standard Nest.JS test commands:
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
 
 ## .ENV
 dotenv package used
@@ -216,6 +201,35 @@ Nav bar:
 ## Authentication
 
 Simple token-based authentication employs one token, which also stored in LocalStorage after LogIn and deleted after LogOut. Auth by username and password.
+
+
+## Tests
+
+Tests test cases for account service in account.service.spec.ts and for payment service in payment.service.spec.ts
+
+Run: 
+yarn run test
+
+Used script in package.json => "test": "jest --config jest.config.js",
+
+The jest-html-reporters plugin generates a test report, and Jest's coverage reporting generates a separate coverage report in HTML format.
+File jest.config.js includes settings.
+
+After running tests, you can find the test report at `/reports/test-report.html` and the coverage report at `/coverage/index.html`.
+
+
+Standard Nest.JS test commands:
+
+```bash
+# unit tests
+$ yarn run test
+
+# e2e tests
+$ yarn run test:e2e
+
+# test coverage
+$ yarn run test:cov
+```
 
 
 ## Installation
