@@ -144,15 +144,17 @@ For the sending account to have sufficient Ether, you  need to use one of the pr
 ## Ganache
 Quickly fire up a personal Ethereum blockchain which used to run tests, execute commands, and inspect state while controlling how the chain operates.
 <a href="https://trufflesuite.com/ganache/" target="_blank">Documentation</a> link.
-![Ganache](/docs/screens/ganache.jpg)
+
 Installation:
 
-Option 1. GUI
+Option 1. GUI => Used in this APP
+![Ganache](/docs/screens/ganache.jpg)
 Download SW and install.
-API requests also supported It will start on: http://localhost:7545 or http://127.0.0.1:7545
+API requests also supported.
+It will start on: http://localhost:7545 or http://127.0.0.1:7545
 
-Option 2. Setting up a separate Ganache instance and interfacing with it programmatically on test server.
-There are limitations in this case. Additional settings needed.
+Option 2. There are limitations in this case, not all functions support =>  Additional settings needed. Setting up a separate Ganache instance and interfacing with it programmatically on test server.
+
 installed globally
 ```bash
 npm install -g ganache-cli
@@ -205,10 +207,14 @@ Simple token-based authentication employs one token, which also stored in LocalS
 
 ## Tests
 
-Tests test cases for account service in account.service.spec.ts and for payment service in payment.service.spec.ts
+Tests test cases for account service in account.service.spec.ts and for payment service in payment.service.spec.ts.
+
+Before run start Ganache SW!
+
 
 Run: 
 yarn run test
+
 
 Used script in package.json => "test": "jest --config jest.config.js",
 
@@ -217,6 +223,28 @@ File jest.config.js includes settings.
 
 After running tests, you can find the test report at `/reports/test-report.html` and the coverage report at `/coverage/index.html`.
 
+account.service.ts coverage:
+![Accounttest](/docs/screens/accounttest.jpg)
+
+payment.service.ts coverage:
+
+Test case list:
+* Service Initialization Test
+Title: 'should be defined (check Service is OK)'
+* Ethereum Test Network Connectivity Test
+Title: 'should connect to the Ganache (Ethereum test network)'
+* Account Creation Test
+Title: 'should create an Ethereum account'
+* Account Creation with Non-existent User Test
+Title: 'should throw NotFoundException when creating an account with a non-existent user ID'
+* Account Retrieval Test
+Title: 'should retrieve an existing account'
+* Non-existent Account Retrieval Test
+Title: 'should throw NotFoundException when retrieving a non-existent account'
+* Accounts Listing Test
+Title: 'should list all accounts'
+* Handling Deleted User in Account Listing Test
+Title: 'should handle listing accounts with a deleted user gracefully'
 
 Standard Nest.JS test commands:
 

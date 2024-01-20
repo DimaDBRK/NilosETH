@@ -7,6 +7,8 @@ import { Account } from './account.entity';
 import { User } from '../user/user.entity';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { getRepositoryToken } from '@nestjs/typeorm';
+// Add the import for NotFoundException
+import { NotFoundException } from '@nestjs/common';
 
 describe('AccountService', () => {
   let service: AccountService;
@@ -65,7 +67,7 @@ describe('AccountService', () => {
     console.log(`Connected to Ganache (Ethereum test network) at block number: ${blockNumber}`);
   });
 
-
+  // Account Creation Tests
   it('should create an Ethereum account', async () => {
 
     // TODO: Create a new account using ethers module
@@ -109,8 +111,88 @@ describe('AccountService', () => {
     console.log(`Created Ethereum account with public key: ${accountResponse.publicKey}`);
     console.log(`Balance of the new account: ${roundedBalance} ETH`);
 
- });
+  });
 
+  it('should throw NotFoundException when creating an account with a non-existent user ID', async () => {
+    // Mock user ID that does not exist
+    const mockUserId = 99;
+    const createAccountDto: CreateAccountDto = { user: mockUserId };
 
+    // Mock the userRepository to return null
+    jest.spyOn(userRepository, 'findOne').mockResolvedValueOnce(null);
+
+    // Expect the createAccount method to throw a NotFoundException
+    await expect(service.createAccount(createAccountDto)).rejects.toThrow(NotFoundException);
+  });
+
+  // Account Retrieval Tests
+  it('should retrieve an existing account', async () => {
+    // Mock account data
+    const mockAccountId = 1;
+    const mockAccount = { id: mockAccountId, publicKey: '0x123', user: { id: 1 } } as Account;
+  
+    // Mock the accountRepository to return a predefined Account object
+    jest.spyOn(accountRepository, 'findOne').mockResolvedValueOnce(mockAccount);
+  
+    // Call the findOne method
+    const account = await service.findOne(mockAccountId);
+  
+    // Check that the retrieved account matches the mock account
+    expect(account).toEqual(mockAccount);
+  });
+
+  it('should throw NotFoundException when retrieving a non-existent account', async () => {
+    // Mock account ID that does not exist
+    const mockAccountId = 99;
+  
+    // Mock the accountRepository to return null
+    jest.spyOn(accountRepository, 'findOne').mockResolvedValueOnce(null);
+  
+    // Expect the findOne method to throw a NotFoundException
+    await expect(service.findOne(mockAccountId)).rejects.toThrow(NotFoundException);
+  });
+
+  // Accounts Listing Tests
+  it('should list all accounts', async () => {
+    // Mock account data
+    const mockAccounts = [
+      { id: 1, publicKey: '0x123', user: { id: 1 } },
+      { id: 2, publicKey: '0x456', user: { id: 2 } },
+    ] as Account[];
+  
+    // Mock the accountRepository to return predefined accounts
+    jest.spyOn(accountRepository, 'find').mockResolvedValueOnce(mockAccounts);
+  
+    // Call the findAll method
+    const accounts = await service.findAll();
+  
+    // Check that the listed accounts match the mock accounts
+    expect(accounts.length).toEqual(mockAccounts.length);
+    expect(accounts).toEqual(
+      expect.arrayContaining(
+        mockAccounts.map(account => ({
+          id: account.id,
+          publicKey: account.publicKey,
+          user: { id: account.user.id },
+        })),
+      ),
+    );
+  });
+
+  it('should handle listing accounts with a deleted user gracefully', async () => {
+    // Mock account data with a deleted user (user is null)
+    const mockAccounts = [
+      { id: 1, publicKey: '0x123', user: null },
+    ] as Account[];
+  
+    // Mock the accountRepository to return predefined accounts
+    jest.spyOn(accountRepository, 'find').mockResolvedValueOnce(mockAccounts);
+  
+    // Call the findAll method
+    const accounts = await service.findAll();
+  
+    // Check that the service returns null for the user field
+    expect(accounts[0].user).toBeNull();
+  });
 
 });
