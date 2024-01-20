@@ -7,7 +7,7 @@ const workspaceDir = path.join(__dirname, 'ganache_workspace');
 // Startup options
 const ganacheOptions = `-p 8545 -e 1000 --db "${workspaceDir}"`;
 
-// Start Ganache
+// Start Ganache => pay attention on limitations 
 const ganache = exec(`ganache-cli ${ganacheOptions}`, (err, stdout, stderr) => {
     if (err) {
         console.error(`exec error: ${err}`);
