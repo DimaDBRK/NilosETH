@@ -144,7 +144,7 @@ For the sending account to have sufficient Ether, you  need to use one of the pr
 ## Ganache
 Quickly fire up a personal Ethereum blockchain which used to run tests, execute commands, and inspect state while controlling how the chain operates.
 <a href="https://trufflesuite.com/ganache/" target="_blank">Documentation</a> link.
-
+![Ganache](/docs/screens/ganache.jpg)
 Installation:
 
 Option 1. GUI
@@ -204,13 +204,14 @@ Main components:
 * UserSpace - to show Users accounts cards, Add account, Show keys, make Payments, Fund Accounts from Ganache accounts (Private keys needed)
 * Payments - table with all payments data
 
+![AllPayments](/docs/screens/allpayments.jpg)
 Nav bar:
 * Logo with link to Home page
 * UserSpace and Payments (if User Login) buttons
 * Switch themes button
 * User Avatar, Name 
 * Log out in additional menu
-![AllPayments](/docs/screens/allpayments.jpg)
+
 
 ## Authentication
 
