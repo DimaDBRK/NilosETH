@@ -22,7 +22,7 @@ TODO:
 - Backend: Nest.js + SQLite + ethers.js
 - Blockchain: Ganache - personal Ethereum blockchain
 - Tests: e2e
-- Frontend: React + Axios
+- Frontend: React + Axios + MUI
 - Authentication System: for demo on modules - passport-local, @nestjs/passport, @nestjs/jwt, passport-jwt
 
 NestJS app containing three modules: 
@@ -34,7 +34,7 @@ Via the API that is exposed with NestJS users can:
 * create the record of themselves in the database;
 * create multiple Ethereum accounts; 
 * and make payments between accounts.
-  
+
 Demo video: TBC
 
 ## Table of Contents
@@ -48,6 +48,8 @@ Demo video: TBC
   - [Ganache](#ganache)
   - [Tests](#tests)
   - [.ENV](#env)
+  - [Frontend](#frontend)
+  - [Authentication](#authentication)
   - [Installation](#installation)
   - [Running the app](#running-the-app)
 
@@ -194,8 +196,35 @@ GANACHE_URL=http://localhost:7545
 JWT_SECRET=AddYourSecretHere
 JWT_EXPIRES_IN=600s
 
-## Installation
+## Frontend
+Pages and main components.
+![Payment](/docs/screens/payment.jpg)
+Main components:
+* Homepage - Login and Register
+* UserSpace - to show Users accounts cards, Add account, Show keys, make Payments, Fund Accounts from Ganache accounts (Private keys needed)
+* Payments - table with all payments data
 
+Nav bar:
+* Logo with link to Home page
+* UserSpace and Payments (if User Login) buttons
+* Switch themes button
+* User Avatar, Name 
+* Log out in additional menu
+![AllPayments](/docs/screens/allpayments.jpg)
+
+## Authentication
+
+Simple token-based authentication employs one token, which also stored in LocalStorage after LogIn and deleted after LogOut. Auth by username and password.
+
+
+## Installation
+Clone the repository:
+
+```bash
+git clone REPO NAME
+cd yourproject
+
+Backend (server)
 ```bash
 $ yarn install
 ```
@@ -213,4 +242,21 @@ $ yarn run start:dev
 # production mode
 $ yarn run start:prod
 ```
+Frontend (client)
+.env file include PORT=3030
 
+Install the dependencies for the React frontend:
+```
+cd ../frontend
+npm install
+```
+
+Start the React development server:
+```
+npm start
+```
+
+Install and start GANACHE.
+
+The server will run on http://localhost:3000. 
+You can access the application by opening your web browser and navigating to http://localhost:3030.

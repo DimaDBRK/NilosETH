@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 // exclude password in return get endpoints
-import { UserDto } from './dto/user.dto';
+import {  UserDto, UserAccountDto } from './dto/user.dto';
 import * as bcrypt from 'bcrypt';
 // create user DTO
 import { UserResponseDto } from './dto/user-response.dto';
@@ -48,11 +48,15 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
+    // Map each account to its ID and publicKey
+    const accounts: UserAccountDto[] = user.accounts.map(account => ({
+      id: account.id,
+      publicKey: account.publicKey,
+    }));
     return { 
       id: user.id, 
       username: user.username,
-      // Map each account to its ID 
-      accounts: user.accounts.map(account => account.id) 
+      accounts
     };
   }
 
@@ -62,7 +66,10 @@ export class UserService {
       id: user.id, 
       username: user.username,
       // Map each account to its ID
-      accounts: user.accounts.map(account => account.id) 
+      accounts: user.accounts.map(account => ({ 
+        id: account.id,
+        publicKey: account.publicKey
+      })) 
      }));
   }
 

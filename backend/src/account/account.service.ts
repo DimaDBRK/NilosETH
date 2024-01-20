@@ -73,6 +73,17 @@ export class AccountService {
   }
 
   async findAll() {
-    return this.accountRepository.find();
+    // Find the user relation
+    const accounts = await this.accountRepository.find({
+      relations: ['user'], 
+    });
+    
+     // => AccountResponseDto
+     return accounts.map(account => ({
+      id: account.id,
+      publicKey: account.publicKey,
+      // Check if user is not null for deleted user accounts 
+      user: account.user ? { id: account.user.id } : null, 
+    }));
   }
 }
