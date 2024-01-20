@@ -35,7 +35,7 @@ Via the API that is exposed with NestJS users can:
 * create multiple Ethereum accounts; 
 * and make payments between accounts.
 
-Demo video: TBC
+Demo video: <a href="https://www.youtube.com/" target="_blank">Youtube link</a>.
 
 ## Table of Contents
 - [Nilos](#nilos)
