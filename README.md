@@ -183,6 +183,9 @@ GANACHE_URL=http://localhost:7545
 JWT_SECRET=AddYourSecretHere
 JWT_EXPIRES_IN=600s
 
+This file should be created in backend root directory.
+Pay attention there is .env.test => settings for test cases only.
+
 ## Frontend
 Pages and main components.
 ![Payment](/docs/screens/payment.jpg)
@@ -209,8 +212,12 @@ Simple token-based authentication employs one token, which also stored in LocalS
 
 Tests test cases for account service in account.service.spec.ts and for payment service in payment.service.spec.ts.
 
-Before run start Ganache SW!
 
+It's a combined unit and integration test that involves spawning a local blockchain at runtime and running tests on it. 
+
+Before run start Ganache SW!
+Modify .env.test (root backend directory) file => check keys for Ganache with test amount more 2 ETH to fund new test accounts.
+jest.setup.js => file include dotenv import
 
 Run: 
 yarn run test
@@ -221,12 +228,10 @@ Used script in package.json => "test": "jest --config jest.config.js",
 The jest-html-reporters plugin generates a test report, and Jest's coverage reporting generates a separate coverage report in HTML format.
 File jest.config.js includes settings.
 
-After running tests, you can find the test report at `/reports/test-report.html` and the coverage report at `/coverage/index.html`.
+After running tests, you can find the test report at <a href="/backend/reports/test-report.html`" target="_blank">test-report.html</a> in "reports" folder  and the coverage report at "coverage" folder.
 
-account.service.ts coverage:
+account.service.ts:
 ![Accounttest](/docs/screens/accounttest.jpg)
-
-payment.service.ts coverage:
 
 Test case list:
 * Service Initialization Test
@@ -245,6 +250,15 @@ Title: 'should throw NotFoundException when retrieving a non-existent account'
 Title: 'should list all accounts'
 * Handling Deleted User in Account Listing Test
 Title: 'should handle listing accounts with a deleted user gracefully'
+
+payment.service.ts:
+![Paymenttest](/docs/screens/paymenttest.jpg)
+* Check Service Initialization: Ensures that the PaymentService is properly instantiated and defined.
+* Connect to Ethereum Test Network: Tests the connection to the Ganache (Ethereum test network) and checks if it can retrieve the current block number.
+* Fund 'From' Account from Ganache: Verifies that the 'from' account can be successfully funded from a specified Ganache account, and checks the balance after funding.
+* Account Creation Verification: Confirms the creation of 'from' and 'to' accounts before testing payment functionalities.
+* Payment Transaction Execution: Validates the successful execution of a payment transaction from the 'from' account to the 'to' account, checking the transaction's structure and final account balances.
+* Insufficient Funds Error Handling: Tests the service's response when attempting to make a payment with insufficient funds in the 'from' account.
 
 Standard Nest.JS test commands:
 

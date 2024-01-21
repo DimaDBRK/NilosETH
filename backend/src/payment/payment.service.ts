@@ -20,8 +20,8 @@ import { PaymentDto } from './dto/payment.dto';
 export class PaymentService {
   // logger
   private readonly logger = new Logger(PaymentService.name);
-  // provider added
-  private provider: ethers.JsonRpcProvider;
+  // provider added => public to use in tests
+  public provider: ethers.JsonRpcProvider;
 
   constructor(
     @InjectRepository(Payment)
@@ -64,7 +64,7 @@ export class PaymentService {
      
      
       // check
-      if (fromBalanceBN <= amountToTransferBN) {
+      if (fromBalanceBN < amountToTransferBN) {
         throw new BadRequestException('Insufficient balance in the from account');
       }
       // Create a new Ethereum wallet for the 'from' account

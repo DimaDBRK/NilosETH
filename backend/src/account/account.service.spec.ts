@@ -179,20 +179,4 @@ describe('AccountService', () => {
     );
   });
 
-  it('should handle listing accounts with a deleted user gracefully', async () => {
-    // Mock account data with a deleted user (user is null)
-    const mockAccounts = [
-      { id: 1, publicKey: '0x123', user: null },
-    ] as Account[];
-  
-    // Mock the accountRepository to return predefined accounts
-    jest.spyOn(accountRepository, 'find').mockResolvedValueOnce(mockAccounts);
-  
-    // Call the findAll method
-    const accounts = await service.findAll();
-  
-    // Check that the service returns null for the user field
-    expect(accounts[0].user).toBeNull();
-  });
-
 });

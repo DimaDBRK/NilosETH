@@ -27,4 +27,6 @@ module.exports = {
       includeConsoleLog: true, 
     }],
   ],
+  // add setup file to use  .env.test variables
+  setupFiles: ['<rootDir>/jest.setup.js']
 };
