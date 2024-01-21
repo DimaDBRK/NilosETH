@@ -228,7 +228,7 @@ Used script in package.json => "test": "jest --config jest.config.js",
 The jest-html-reporters plugin generates a test report, and Jest's coverage reporting generates a separate coverage report in HTML format.
 File jest.config.js includes settings.
 
-After running tests, you can find the test report at <a href="/backend/reports/test-report.html`" target="_blank">test-report.html</a> in "reports" folder  and the coverage report at "coverage" folder.
+After running tests, you can find the test report at <a href="/backend/reports/test-report.html" target="_blank">test-report.html</a> in "reports" folder  and the coverage report at "coverage" folder.
 
 account.service.ts:
 ![Accounttest](/docs/screens/accounttest.jpg)
