@@ -29,14 +29,14 @@ NestJS app containing three modules:
 * User 
 * Account
 * Payment. 
-Added Auth module for UI demo.
+* Added => Auth module for UI demo.
 
 Via the API that is exposed with NestJS users can:
 * create the record of themselves in the database;
 * create multiple Ethereum accounts; 
 * and make payments between accounts.
 
-Demo video: <a href="https://www.youtube.com/" target="_blank">Youtube link</a>.
+Demo video: <a href="https://youtu.be/sycrGJ8I96E" target="_blank">Youtube link</a>.
 
 ## Table of Contents
 - [Nilos](#nilos)
