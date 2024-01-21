@@ -17,7 +17,7 @@ TODO:
   <a href="https://ethereum.org/" target="_blank"><img src="/docs/images/ethlogo.png" alt="ethereum" /></a>
 </p>
 
-## Web Service Overview
+# Web Service Overview
 
 - Backend: Nest.js + SQLite + ethers.js
 - Blockchain: Ganache - personal Ethereum blockchain
@@ -40,7 +40,7 @@ Demo video: <a href="https://www.youtube.com/" target="_blank">Youtube link</a>.
 ## Table of Contents
 - [Nilos](#nilos)
 - [Task Description:](#task-description)
-  - [Web Service Overview](#web-service-overview)
+- [Web Service Overview](#web-service-overview)
   - [Table of Contents](#table-of-contents)
   - [Database](#database)
   - [Backend and API](#backend-and-api)
@@ -49,8 +49,8 @@ Demo video: <a href="https://www.youtube.com/" target="_blank">Youtube link</a>.
   - [.ENV](#env)
   - [Frontend](#frontend)
   - [Authentication](#authentication)
-  - [Tests](#tests)
-  - [Installation](#installation)
+- [Tests](#tests)
+- [Installation](#installation)
   - [Running the app](#running-the-app)
 
 ## Database
@@ -208,7 +208,7 @@ Nav bar:
 Simple token-based authentication employs one token, which also stored in LocalStorage after LogIn and deleted after LogOut. Auth by username and password.
 
 
-## Tests
+# Tests
 
 Tests test cases for account service in account.service.spec.ts and for payment service in payment.service.spec.ts.
 
@@ -275,7 +275,7 @@ $ yarn run test:cov
 ```
 
 
-## Installation
+# Installation
 Clone the repository:
 
 ```bash
