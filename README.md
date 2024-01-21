@@ -21,7 +21,7 @@ TODO:
 
 - Backend: Nest.js + SQLite + ethers.js
 - Blockchain: Ganache - personal Ethereum blockchain
-- Tests: account.service and payment.service
+- Tests: combined unit and integration test cases for account.service and payment.service
 - Frontend: React + Axios + MUI
 - Authentication System: for demo on modules - passport-local, @nestjs/passport, @nestjs/jwt, passport-jwt
 
@@ -215,7 +215,7 @@ Simple token-based authentication employs one token, which also stored in LocalS
 Tests test cases for account service in account.service.spec.ts and for payment service in payment.service.spec.ts.
 
 
-It's a combined unit and integration test that involves spawning a local blockchain at runtime and running tests on it. 
+It's a combined unit and integration test cases that involves spawning a local blockchain at runtime and running tests on it. 
 
 Before run start Ganache SW!
 Modify .env.test (root backend directory) file => check keys for Ganache with test amount more 2 ETH to fund new test accounts.
