@@ -29,6 +29,7 @@ NestJS app containing three modules:
 * User 
 * Account
 * Payment. 
+Added Auth module for UI demo.
 
 Via the API that is exposed with NestJS users can:
 * create the record of themselves in the database;
@@ -45,6 +46,9 @@ Demo video: <a href="https://www.youtube.com/" target="_blank">Youtube link</a>.
   - [Database](#database)
   - [Backend and API](#backend-and-api)
   - [Blockchain interacting:](#blockchain-interacting)
+    - [New Account creation:](#new-account-creation)
+    - [Note: There will not be new account in Ganache API request - get all accounts.](#note-there-will-not-be-new-account-in-ganache-api-request---get-all-accounts)
+    - [Funding Accounts:](#funding-accounts)
   - [Ganache](#ganache)
   - [.ENV](#env)
   - [Frontend](#frontend)
@@ -87,8 +91,11 @@ Payment
 
 ## Backend and API
 
-NestJS used. It is a popular framework for building efficient and scalable server-side applications using Node.js. It is built with TypeScript.
-It  easily integrate with other libraries like TypeORM for database interactions.
+NestJS used. It is a popular framework for building efficient and scalable server-side applications using Node.js. It is built with TypeScript. It is integrate with library TypeORM for database interactions.
+
+
+<a href="https://docs.nestjs.com/openapi/introduction" target="_blank">Documentation</a> link.
+
 
 List of API’s:
 
@@ -123,24 +130,25 @@ NestJS SwaggerModule automatically reflects all endpoints.
 While the application is running, open your browser and navigate to http://localhost:3000/api
 To generate and download a Swagger JSON file, navigate to http://localhost:3000/api-json
 
-<a href="https://docs.nestjs.com/openapi/introduction" target="_blank">Documentation</a> link.
 
 Postman collection available in folder docs subfolder postman <a href="/docs/postman/" target="_blank">postman</a>.
 
 
 ## Blockchain interacting:
 
-<a href="https://docs.ethers.org/v6/" target="_blank">ethers</a> link.
+
 The ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.
 
-New Account creation:
+<a href="https://docs.ethers.org/v6/" target="_blank">ethers</a> link.
+
+
+### New Account creation:
 The ethers library, when used with Wallet.createRandom(), generates a new Ethereum wallet (which includes a public-private key pair) independently of the Ethereum network or any node you are connected to (Ganache in this app).
 
-There will not be new account in Ganache API request - get all accounts.
-
+### Note: There will not be new account in Ganache API request - get all accounts.
 It's creating an Ethereum wallet with a new public-private key pair, but this wallet is not being "registered" or "created" on the Ganache blockchain. Instead, it exists as a standalone entity. In Ethereum, wallets don't need to be registered with the network; their existence is implicit. When a wallet interacts with the blockchain (like sending a transaction), that's when it becomes part of the blockchain's state.
 
-Funding Accounts: 
+### Funding Accounts: 
 For the sending account to have sufficient Ether, you  need to use one of the pre-funded accounts provided by Ganache (for test - created 10 accounts with 1000 ETH).
 
 ## Ganache
