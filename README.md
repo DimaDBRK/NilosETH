@@ -125,6 +125,8 @@ To generate and download a Swagger JSON file, navigate to http://localhost:3000/
 
 <a href="https://docs.nestjs.com/openapi/introduction" target="_blank">Documentation</a> link.
 
+Postman collection available in folder docs subfolder postman <a href="/docs/postman/" target="_blank">postman</a>.
+
 
 ## Blockchain interacting:
 
