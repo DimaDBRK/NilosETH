@@ -233,7 +233,7 @@ After running tests, you can find the test report at <a href="/backend/reports/t
 account.service.ts:
 ![Accounttest](/docs/screens/accounttest.jpg)
 
-Test case list:
+Test cases list:
 * Service Initialization Test
 Title: 'should be defined (check Service is OK)'
 * Ethereum Test Network Connectivity Test
@@ -253,6 +253,7 @@ Title: 'should handle listing accounts with a deleted user gracefully'
 
 payment.service.ts:
 ![Paymenttest](/docs/screens/paymenttest.jpg)
+Test cases list:
 * Check Service Initialization: Ensures that the PaymentService is properly instantiated and defined.
 * Connect to Ethereum Test Network: Tests the connection to the Ganache (Ethereum test network) and checks if it can retrieve the current block number.
 * Fund 'From' Account from Ganache: Verifies that the 'from' account can be successfully funded from a specified Ganache account, and checks the balance after funding.
